@@ -12,7 +12,23 @@ const getSingleService = async (id: string) => {
 };
 
 const getAllService = async () => {
-    const result = Service.find();
+  const result = Service.find();
+  return result;
+};
+
+const updateService = async (id: string, payload: Partial<TService>) => {
+  const result = Service.findByIdAndUpdate(id, payload, { new: true });
+  return result;
+};
+
+const deleteService = async (id: string) => {
+  const result = Service.findByIdAndUpdate(
+    id,
+    {
+      isDeleted: true,
+    },
+    { new: true },
+  );
   return result;
 };
 
@@ -20,4 +36,6 @@ export const ServiceServices = {
   createService,
   getSingleService,
   getAllService,
+  updateService,
+  deleteService
 };

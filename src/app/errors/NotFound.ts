@@ -5,6 +5,7 @@ const NotFound = (req: Request, res: Response) => {
     success: true,
     statusCode: 404,
     message: 'Not Found',
+    data:[]
   });
 };
 
