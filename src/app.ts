@@ -1,4 +1,4 @@
-
+import express from 'express';
 import router from './app/routes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
