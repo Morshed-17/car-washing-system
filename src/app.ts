@@ -1,8 +1,9 @@
-import express from 'express';
+
 import router from './app/routes';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import NotFound from './app/errors/NotFound';
 const app = express();
 
 // parsers
@@ -17,6 +18,8 @@ app.get('/', (req, res) => {
 
 app.use('/api', router);
 
-app.use(globalErrorHandler())
+app.use(globalErrorHandler);
+
+app.all('*', NotFound);
 
 export default app;
