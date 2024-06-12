@@ -12,51 +12,20 @@ const createSlot = catchAsync(async (req, res) => {
     data: result,
   });
 });
-const getSingleSlot = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await SlotSlot.getSingleSlot(id);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Slot retrieved successfully!',
-    data: result,
-  });
-});
+
 const getAvailableSlots = catchAsync(async (req, res) => {
   const result = await SlotSlot.getAvailableSlots(req.query);
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Available slots retrieved successfully',
-    data: result,
-  });
-});
-
-const updateSlot = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await SlotSlot.updateSlot(id, req.body);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Slot updated successfully!',
-    data: result,
-  });
-});
-const deleteSlot = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await SlotSlot.deleteSlot(id);
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Slot deleted successfully!',
+    success: result.length ? true : false,
+    statusCode: result.length ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: result.length
+      ? 'Available slots retrieved successfully'
+      : 'No Data Found',
     data: result,
   });
 });
 
 export const SlotControllers = {
   createSlot,
-  getSingleSlot,
   getAvailableSlots,
-  updateSlot,
-  deleteSlot,
 };

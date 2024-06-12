@@ -16,19 +16,20 @@ const getSingleService = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await ServiceServices.getSingleService(id);
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Service retrieved successfully!',
+    success: result ? true : false,
+    statusCode: result ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: result ? 'Service retrieved successfully!' : 'No Data Found',
     data: result,
   });
 });
 const getAllServices = catchAsync(async (req, res) => {
-  
   const result = await ServiceServices.getAllService();
   sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: 'Services retrieved successfully!',
+    success: result.length ? true : false,
+    statusCode: result.length ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: result.length
+      ? 'Services retrieved successfully!'
+      : 'No Data Found',
     data: result,
   });
 });
@@ -59,5 +60,5 @@ export const ServiceControllers = {
   getSingleService,
   getAllServices,
   updateService,
-  deleteService
+  deleteService,
 };

@@ -59,7 +59,7 @@ const getAllBookings = async () => {
   return result;
 };
 
-const getSingleBooking = async (user: JwtPayload) => {
+const getUserBooking = async (user: JwtPayload) => {
   const userData = await User.findOne({ email: user?.email, role: user?.role });
 
   const result = Booking.find({ customer: userData?._id });
@@ -68,6 +68,6 @@ const getSingleBooking = async (user: JwtPayload) => {
 
 export const BookingServices = {
   createBooking,
-  getSingleBooking,
+  getUserBooking,
   getAllBookings,
 };
