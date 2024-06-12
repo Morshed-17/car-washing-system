@@ -5,7 +5,8 @@ import { BookingServices } from './booking.service';
 
 
 const createBooking = catchAsync(async (req, res) => {
-  const result = await BookingServices.createBooking(req.body);
+  const user = req.user
+  const result = await BookingServices.createBooking(req.body, user);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

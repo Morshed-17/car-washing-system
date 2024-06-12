@@ -3,9 +3,9 @@ import { vehicleTypes } from './booking.constant';
 
 const createBookingValidationSchema = z.object({
   body: z.object({
-    customer: z.string({ required_error: 'Customer is required' }),
-    service: z.string({ required_error: 'Service is required' }),
-    slot: z.string({ required_error: 'Slot is required' }),
+
+    serviceId: z.string({ required_error: 'Service is required' }),
+    slotId: z.string({ required_error: 'Slot is required' }),
     vehicleType: z.enum(vehicleTypes),
     vehicleBrand: z.string({ required_error: 'Vehicle Brand is required' }),
     vehicleModel: z.string({ required_error: 'Vehicle Model is required' }),
