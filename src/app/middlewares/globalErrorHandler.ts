@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
+import AppError from '../errors/AppError';
 
 const globalErrorHandler = (
-  err: Error,
+  err: AppError,
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  res.json({
+  res.status(err.statusCode).json({
     success: false,
     message: err.message,
     err: err,
