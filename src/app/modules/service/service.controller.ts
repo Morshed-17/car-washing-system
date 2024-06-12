@@ -23,6 +23,7 @@ const getSingleService = catchAsync(async (req, res) => {
   });
 });
 const getAllServices = catchAsync(async (req, res) => {
+  
   const result = await ServiceServices.getAllService();
   sendResponse(res, {
     success: true,

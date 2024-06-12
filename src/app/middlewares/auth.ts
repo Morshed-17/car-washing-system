@@ -6,7 +6,6 @@ import catchAsync from '../utils/catchAsync';
 import { TUserRoles } from '../modules/User/user.interface';
 import config from '../config';
 import { User } from '../modules/User/user.model';
-import { TJwtPayload } from '../interface/JwtPayload';
 import AppError from '../errors/AppError';
 
 const auth = (...requiredRoles: TUserRoles[]) => {

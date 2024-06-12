@@ -23,7 +23,7 @@ const getSingleSlot = catchAsync(async (req, res) => {
   });
 });
 const getAvailableSlots = catchAsync(async (req, res) => {
-  const result = await SlotSlot.getAvailableSlots();
+  const result = await SlotSlot.getAvailableSlots(req.query);
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,

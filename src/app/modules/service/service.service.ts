@@ -12,17 +12,18 @@ const getSingleService = async (id: string) => {
 };
 
 const getAllService = async () => {
-  const result = Service.find();
+  
+  const result = await Service.find();
   return result;
 };
 
 const updateService = async (id: string, payload: Partial<TService>) => {
-  const result = Service.findByIdAndUpdate(id, payload, { new: true });
+  const result = await Service.findByIdAndUpdate(id, payload, { new: true });
   return result;
 };
 
 const deleteService = async (id: string) => {
-  const result = Service.findByIdAndUpdate(
+  const result = await Service.findByIdAndUpdate(
     id,
     {
       isDeleted: true,
@@ -37,5 +38,5 @@ export const ServiceServices = {
   getSingleService,
   getAllService,
   updateService,
-  deleteService
+  deleteService,
 };
