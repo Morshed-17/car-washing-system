@@ -27,10 +27,7 @@ const createBooking = async (payload: TBookingForReq, user: JwtPayload) => {
     throw new AppError(httpStatus.NOT_FOUND, 'Slot does not exists');
   }
   if (slotData?.isBooked === 'booked') {
-    throw new AppError(
-      httpStatus.BAD_REQUEST,
-      'This slot is already booked',
-    );
+    throw new AppError(httpStatus.BAD_REQUEST, 'This slot is already booked');
   }
   await Slot.findByIdAndUpdate(payload?.slotId, {
     isBooked: 'booked',
@@ -54,18 +51,21 @@ const createBooking = async (payload: TBookingForReq, user: JwtPayload) => {
   return result;
 };
 
+const getAllBookings = async () => {
+  const result = await Booking.find()
+    .populate('customer')
+    .populate('service')
+    .populate('slot');
+  return result;
+};
+
 // const getSingleBooking = async (id: string) => {
 //   const result = Booking.findById(id);
 //   return result;
 // };
 
-// const getAllBooking = async () => {
-//   const result = Booking.find();
-//   return result;
-// };
-
 export const BookingServices = {
   createBooking,
-  //   getSingleBooking,
-  //   getAllBooking,
+  // getSingleBooking,
+  getAllBookings,
 };
