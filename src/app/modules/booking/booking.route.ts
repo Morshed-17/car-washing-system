@@ -12,6 +12,7 @@ router.post(
   validateRequest(BookingValidations.createBookingValidationSchema),
   BookingControllers.createBooking,
 );
+router.get('/', auth('user'), BookingControllers.getSingleBooking);
 router.get('/', BookingControllers.getAllBookings);
 
 export const BookingRoutes = router;

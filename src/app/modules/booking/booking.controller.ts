@@ -23,19 +23,20 @@ const getAllBookings = catchAsync(async (req, res) => {
   });
 });
 
-// const getSingleService = catchAsync(async (req, res) => {
-//   const { id } = req.params;
-//   const result = await BookingServices.getSingleService(id);
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: httpStatus.OK,
-//     message: 'Service retrieved successfully!',
-//     data: result,
-//   });
-// });
+const getSingleBooking = catchAsync(async (req, res) => {
+
+  const user = req.user
+  const result = await BookingServices.getSingleBooking(user);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'User bookings retrieved successfully',
+    data: result,
+  });
+});
 
 export const BookingControllers = {
   createBooking,
-  //   getSingleService,
+  getSingleBooking,
   getAllBookings,
 };
