@@ -58,8 +58,8 @@ const getSingleSlot = async (id: string) => {
   return result;
 };
 
-const getAllSlot = async () => {
-  const result = Slot.find();
+const getAvailableSlots = async () => {
+  const result = Slot.find().populate('service');
   return result;
 };
 
@@ -82,7 +82,7 @@ const deleteSlot = async (id: string) => {
 export const SlotSlot = {
   createSlot,
   getSingleSlot,
-  getAllSlot,
+  getAvailableSlots,
   updateSlot,
   deleteSlot,
 };

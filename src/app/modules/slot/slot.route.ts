@@ -11,8 +11,8 @@ router.post(
   validateRequest(SlotValidations.createSlotValidationSchema),
   SlotControllers.createSlot,
 );
-router.get('/:id', SlotControllers.getSingleSlot);
-router.get('/', SlotControllers.getAllSlots);
+
+router.get('/availability', SlotControllers.getAvailableSlots);
 
 // router.put(
 //   '/:id',

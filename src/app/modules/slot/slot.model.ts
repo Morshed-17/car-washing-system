@@ -6,10 +6,11 @@ const slotSchema = new Schema<TSlot>(
   {
     service: {
       type: Schema.Types.ObjectId,
+      ref: "Service",
       required: true,
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
     startTime: {

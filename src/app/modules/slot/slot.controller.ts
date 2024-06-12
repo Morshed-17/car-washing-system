@@ -22,12 +22,12 @@ const getSingleSlot = catchAsync(async (req, res) => {
     data: result,
   });
 });
-const getAllSlots = catchAsync(async (req, res) => {
-  const result = await SlotSlot.getAllSlot();
+const getAvailableSlots = catchAsync(async (req, res) => {
+  const result = await SlotSlot.getAvailableSlots();
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Slots retrieved successfully!',
+    message: 'Available slots retrieved successfully',
     data: result,
   });
 });
@@ -56,7 +56,7 @@ const deleteSlot = catchAsync(async (req, res) => {
 export const SlotControllers = {
   createSlot,
   getSingleSlot,
-  getAllSlots,
+  getAvailableSlots,
   updateSlot,
   deleteSlot,
 };
