@@ -1,8 +1,10 @@
-export type ErroSources = {
-  path: string;
+export type TErrorMessages = {
+  path: string| number;
   message: string;
 }[];
 
-export type ErrorResponse = {
-    
-}
+export type TErrorResponse = {
+  statusCode: number;
+  message: string;
+  errorMessages: TErrorMessages;
+};

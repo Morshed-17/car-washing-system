@@ -3,19 +3,62 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import AppError from '../errors/AppError';
 import { ZodError } from 'zod';
+import handleZodError from '../errors/handleZodError';
+import { TErrorMessages } from '../interface/error';
+import handleValidationError from '../errors/handleValidationError';
+import handleCastError from '../errors/handleCastError';
+import handleDuplicateError from '../errors/handleDuplicateError';
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
   let message = 'Something went went';
-  const errorMessages= [
+  let errorMessages: TErrorMessages = [
     {
       path: '',
-      message: err.message,
+      message: 'Something went wrong',
     },
   ];
 
+  if (err instanceof ZodError) {
+    const response = handleZodError(err);
+    statusCode = response.statusCode;
+    message = response.message;
+    errorMessages = response.errorMessages;
+  } else if (err.name === 'ValidationError') {
+    const response = handleValidationError(err);
+    statusCode = response.statusCode;
+    message = response.message;
+    errorMessages = response.errorMessages;
+  } else if (err.name === 'CastError') {
+    const response = handleCastError(err);
+    statusCode = response.statusCode;
+    message = response.message;
+    errorMessages = response.errorMessages;
+  } else if (err.code === 11000) {
+    const response = handleDuplicateError(err);
+    statusCode = response.statusCode;
+    message = response.message;
+    errorMessages = response.errorMessages;
+  } else if (err instanceof AppError) {
+    statusCode = err.statusCode;
+    message = err.message;
+    errorMessages = [
+      {
+        path: '',
+        message: err?.message,
+      },
+    ];
+  } else if (err instanceof Error) {
+    message = err.message;
+    errorMessages = [
+      {
+        path: '',
+        message: err?.message,
+      },
+    ];
+  }
+
   res.status(statusCode).json({
-    err,
     success: false,
     message,
     errorMessages,
