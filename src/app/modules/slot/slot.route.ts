@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post(
   '/',
+  auth('admin'),
   validateRequest(SlotValidations.createSlotValidationSchema),
 
   SlotControllers.createSlot,

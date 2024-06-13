@@ -8,7 +8,7 @@ const createService = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: 'Service created successfully!',
+    message: 'Service created successfully',
     data: result,
   });
 });
@@ -18,7 +18,7 @@ const getSingleService = catchAsync(async (req, res) => {
   sendResponse(res, {
     success: result ? true : false,
     statusCode: result ? httpStatus.OK : httpStatus.NOT_FOUND,
-    message: result ? 'Service retrieved successfully!' : 'No Data Found',
+    message: result ? 'Service retrieved successfully' : 'No Data Found',
     data: result,
   });
 });
@@ -28,7 +28,7 @@ const getAllServices = catchAsync(async (req, res) => {
     success: result.length ? true : false,
     statusCode: result.length ? httpStatus.OK : httpStatus.NOT_FOUND,
     message: result.length
-      ? 'Services retrieved successfully!'
+      ? 'Services retrieved successfully'
       : 'No Data Found',
     data: result,
   });

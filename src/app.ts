@@ -15,7 +15,9 @@ app.use(cors());
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json({
+    message: "Wellcome to Car Wash Backend"
+  });
 });
 
 app.use('/api', router);
