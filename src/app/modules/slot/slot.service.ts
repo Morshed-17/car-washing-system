@@ -57,15 +57,14 @@ const createSlot = async (payload: TSlot) => {
 
 const getAvailableSlots = async (query: Record<string, unknown>) => {
   const queryObj: Partial<{ service: string; date: string }> = {};
-
   if (query?.date) {
     queryObj.date = query.date as string;
   }
 
   if (query?.serviceId) {
     queryObj.service = query.serviceId as string;
-  }
-
+  } 
+  
   const result = await Slot.find(queryObj);
 
   return result;

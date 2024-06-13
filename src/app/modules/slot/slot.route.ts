@@ -4,7 +4,6 @@ import { SlotValidations } from './slot.validation';
 import { SlotControllers } from './slot.controller';
 import auth from '../../middlewares/auth';
 
-
 const router = express.Router();
 
 router.post(
@@ -15,8 +14,6 @@ router.post(
   SlotControllers.createSlot,
 );
 
-router.get('/availability', auth('user'),SlotControllers.getAvailableSlots);
-
-
+router.get('/availability', auth('user'), SlotControllers.getAvailableSlots);
 
 export const SlotRoutes = router;

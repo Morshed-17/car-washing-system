@@ -1,3 +1,5 @@
+import  httpStatus  from 'http-status-codes';
+import AppError from '../../errors/AppError';
 import { TService } from './service.interface';
 import { Service } from './service.model';
 
@@ -18,6 +20,11 @@ const getAllService = async () => {
 };
 
 const updateService = async (id: string, payload: Partial<TService>) => {
+  const service = await Service.findById(id)
+  if(!service){
+    throw new AppError(httpStatus.NOT_FOUND, "Service Not Found by this id")
+  }
+
   const result = await Service.findByIdAndUpdate(id, payload, { new: true });
   return result;
 };
