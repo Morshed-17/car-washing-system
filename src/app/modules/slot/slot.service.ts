@@ -53,10 +53,7 @@ const createSlot = async (payload: TSlot) => {
   return result;
 };
 
-const getSingleSlot = async (id: string) => {
-  const result = await Slot.findById(id);
-  return result;
-};
+
 
 const getAvailableSlots = async (query: Record<string, unknown>) => {
   const queryObj: Partial<{ service: string; date: string }> = {};
@@ -74,26 +71,9 @@ const getAvailableSlots = async (query: Record<string, unknown>) => {
   return result;
 };
 
-const updateSlot = async (id: string, payload: Partial<TSlot>) => {
-  const result = Slot.findByIdAndUpdate(id, payload, { new: true });
-  return result;
-};
-
-const deleteSlot = async (id: string) => {
-  const result = Slot.findByIdAndUpdate(
-    id,
-    {
-      isDeleted: true,
-    },
-    { new: true },
-  );
-  return result;
-};
 
 export const SlotSlot = {
   createSlot,
-  getSingleSlot,
   getAvailableSlots,
-  updateSlot,
-  deleteSlot,
+  
 };
