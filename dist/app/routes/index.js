@@ -8,6 +8,7 @@ const auth_route_1 = require("../modules/auth/auth.route");
 const service_route_1 = require("../modules/service/service.route");
 const slot_route_1 = require("../modules/slot/slot.route");
 const booking_route_1 = require("../modules/booking/booking.route");
+const slot_route2_1 = require("../modules/slot/slot.route2");
 const router = express_1.default.Router();
 const moduleRoutes = [
     {
@@ -21,6 +22,10 @@ const moduleRoutes = [
     {
         path: '/services/slots',
         route: slot_route_1.SlotRoutes,
+    },
+    {
+        path: '/slots/availability',
+        route: slot_route2_1.SlotRoutes2,
     },
     {
         path: '/bookings',

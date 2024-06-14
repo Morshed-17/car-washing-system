@@ -11,5 +11,4 @@ const slot_controller_1 = require("./slot.controller");
 const auth_1 = __importDefault(require("../../middlewares/auth"));
 const router = express_1.default.Router();
 router.post('/', (0, auth_1.default)('admin'), (0, validateRequest_1.default)(slot_validation_1.SlotValidations.createSlotValidationSchema), slot_controller_1.SlotControllers.createSlot);
-router.get('/availability', (0, auth_1.default)('user'), slot_controller_1.SlotControllers.getAvailableSlots);
 exports.SlotRoutes = router;
