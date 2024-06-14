@@ -16,7 +16,7 @@ router.post(
 
 const router2 = express.Router();
 
-router.get('/', SlotControllers.getAvailableSlots);
+router2.get('/', SlotControllers.getAvailableSlots);
 
 export const SlotRoutes = router;
 export const SlotRoutes2 = router2;

@@ -13,6 +13,6 @@ const router = express_1.default.Router();
 router.post('/', (0, auth_1.default)('user'), (0, validateRequest_1.default)(booking_validation_1.BookingValidations.createBookingValidationSchema), booking_controller_1.BookingControllers.createBooking);
 router.get('/', (0, auth_1.default)('admin'), booking_controller_1.BookingControllers.getAllBookings);
 const router2 = express_1.default.Router();
-router.get('/', (0, auth_1.default)('user'), booking_controller_1.BookingControllers.getUserBooking);
+router2.get('/', (0, auth_1.default)('user'), booking_controller_1.BookingControllers.getUserBooking);
 exports.BookingRoutes = router;
 exports.BookingRoutes2 = router2;
