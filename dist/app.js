@@ -9,8 +9,6 @@ const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const globalErrorHandler_1 = __importDefault(require("./app/middlewares/globalErrorHandler"));
 const NotFound_1 = __importDefault(require("./app/errors/NotFound"));
-const auth_1 = __importDefault(require("./app/middlewares/auth"));
-const booking_controller_1 = require("./app/modules/booking/booking.controller");
 const app = (0, express_1.default)();
 // parsers
 app.use(express_1.default.json());
@@ -22,7 +20,6 @@ app.get('/', (req, res) => {
     });
 });
 app.use('/api', routes_1.default);
-app.get('/api/my-bookings', (0, auth_1.default)('user'), booking_controller_1.BookingControllers.getUserBooking);
 app.use(globalErrorHandler_1.default);
 app.all('*', NotFound_1.default);
 exports.default = app;

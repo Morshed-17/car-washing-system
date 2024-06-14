@@ -4,8 +4,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import NotFound from './app/errors/NotFound';
-import auth from './app/middlewares/auth';
-import { BookingControllers } from './app/modules/booking/booking.controller';
 const app = express();
 
 // parsers
@@ -21,8 +19,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', router);
-
-app.get('/api/my-bookings', auth('user'), BookingControllers.getUserBooking);
 
 app.use(globalErrorHandler);
 

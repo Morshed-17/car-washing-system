@@ -14,5 +14,4 @@ router.post(
   SlotControllers.createSlot,
 );
 
-
 export const SlotRoutes = router;
