@@ -3,8 +3,8 @@
 # Car Wash Booking System
 
 ## Live URL
-https://car-washing-system-bice.vercel.app
-[https://car-washing-system-bice.vercel.app/](https://car-washing-system-bice.vercel.app)
+
+[https://car-washing-system-bice.vercel.app](https://car-washing-system-bice.vercel.app)
 
 ## Description
 
