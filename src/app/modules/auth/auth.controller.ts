@@ -19,7 +19,7 @@ const login: RequestHandler = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({
     success: true,
     statusCode: httpStatus.OK,
-    message: "User logged in successfuly",
+    message: 'User logged in successfuly',
     token,
     data: user,
   });

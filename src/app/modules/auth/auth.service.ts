@@ -35,10 +35,8 @@ const login = async (payload: TLoginUser) => {
 
   return {
     token,
-    user
-  }
-
-
+    user,
+  };
 };
 
 export const AuthServices = {

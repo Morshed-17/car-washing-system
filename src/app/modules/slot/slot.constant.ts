@@ -1,3 +1,1 @@
-
-
-export const IsBooked = ["available", "booked", "canceled"]
+export const IsBooked = ['available', 'booked', 'canceled'];

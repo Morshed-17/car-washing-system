@@ -23,7 +23,6 @@ export type TBooking = {
   registrationPlate: string;
 };
 export type TBookingForReq = {
-
   serviceId: Types.ObjectId;
   slotId: Types.ObjectId;
   vehicleType: TVehicleTypes;

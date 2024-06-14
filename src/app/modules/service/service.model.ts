@@ -29,11 +29,11 @@ const serviceSchema = new Schema<TService>(
   },
 );
 
-serviceSchema.pre('find', function(){
-  this.find({isDeleted: {$ne: true}})
-})
-serviceSchema.pre('findOne', function(){
-  this.find({isDeleted: {$ne: true}})
-})
+serviceSchema.pre('find', function () {
+  this.find({ isDeleted: { $ne: true } });
+});
+serviceSchema.pre('findOne', function () {
+  this.find({ isDeleted: { $ne: true } });
+});
 
 export const Service = model<TService>('Service', serviceSchema);

@@ -4,7 +4,6 @@ import { ServiceRoutes } from '../modules/service/service.route';
 import { SlotRoutes } from '../modules/slot/slot.route';
 import { BookingRoutes } from '../modules/booking/booking.route';
 
-
 const router = express.Router();
 
 const moduleRoutes = [
@@ -24,7 +23,6 @@ const moduleRoutes = [
     path: '/bookings',
     route: BookingRoutes,
   },
-  
 ];
 
 moduleRoutes.forEach((item) => router.use(item.path, item.route));
