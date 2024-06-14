@@ -1,10 +1,8 @@
 import express from 'express';
 import { AuthRoutes } from '../modules/auth/auth.route';
 import { ServiceRoutes } from '../modules/service/service.route';
-import { SlotRoutes } from '../modules/slot/slot.route';
-import { BookingRoutes } from '../modules/booking/booking.route';
-import { SlotRoutes2 } from '../modules/slot/slot.route2';
-import { BookingRoutes2 } from '../modules/booking/booking.route2';
+import { SlotRoutes, SlotRoutes2 } from '../modules/slot/slot.route';
+import { BookingRoutes, BookingRoutes2 } from '../modules/booking/booking.route';
 
 const router = express.Router();
 

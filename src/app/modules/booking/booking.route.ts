@@ -15,4 +15,9 @@ router.post(
 
 router.get('/', auth('admin'), BookingControllers.getAllBookings);
 
+const router2 = express.Router();
+
+router.get('/', auth('user'), BookingControllers.getUserBooking);
+
 export const BookingRoutes = router;
+export const BookingRoutes2 = router2;
