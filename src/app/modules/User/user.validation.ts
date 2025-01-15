@@ -9,7 +9,7 @@ const createUserValidationSchema = z.object({
       .email({ message: 'Invalid email' }),
     password: z.string({ required_error: 'Password is required' }),
     phone: z.string({ required_error: 'Phone Number is required' }),
-    role: z.nativeEnum(USER_ROLE),
+    role: z.nativeEnum(USER_ROLE).optional(),
     address: z.string({ required_error: 'Address is required' }),
   }),
 });

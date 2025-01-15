@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import config from '../../config';
 
 const signUp = async (payload: TUser) => {
-  const result = await User.create(payload);
+  const result = await User.create({ ...payload, role: 'user' });
   return result;
 };
 

@@ -9,37 +9,45 @@ const createSlot = async (payload: TSlot) => {
   if (!service) {
     throw new AppError(
       httpStatus.NOT_FOUND,
-      'Service does not exists by this id',
+      'Service does not exist by this id',
     );
   }
-  const serviceDuration = service?.duration;
-  const startTimeString = payload?.startTime;
-  const endTimeString = payload?.endTime;
+  const serviceDuration = service?.duration; // e.g., 90 mins
+  const startTimeString = payload?.startTime; // e.g., "09:00"
+  const endTimeString = payload?.endTime; // e.g., "14:00"
 
+  // Convert start and end times to total minutes
   const startTimeInMins =
-    Number(startTimeString.split(':')[0]) * serviceDuration;
-  const endTimeInMins = Number(endTimeString.split(':')[0]) * serviceDuration;
+    Number(startTimeString.split(':')[0]) * 60 +
+    Number(startTimeString.split(':')[1]);
+  const endTimeInMins =
+    Number(endTimeString.split(':')[0]) * 60 +
+    Number(endTimeString.split(':')[1]);
 
-  const totalDuration = endTimeInMins - startTimeInMins;
-
-  const numberOfSlots = totalDuration / serviceDuration;
-
-  // generate slots
-
+  // Generate slots dynamically
   const timeIntervals: { startTime: string; endTime: string }[] = [];
-  for (let i = 0; i < numberOfSlots; i++) {
+  let currentStartTime = startTimeInMins;
+
+  while (currentStartTime + serviceDuration <= endTimeInMins) {
+    const currentEndTime = currentStartTime + serviceDuration;
+
+    // Convert minutes back to "HH:mm" format
     const startTime =
-      (Number(startTimeString.split(':')[0]) + i).toString() + ':00';
+      String(Math.floor(currentStartTime / 60)).padStart(2, '0') +
+      ':' +
+      String(currentStartTime % 60).padStart(2, '0');
     const endTime =
-      (
-        Number(endTimeString.split(':')[0]) -
-        (numberOfSlots - 1) +
-        i
-      ).toString() + ':00';
+      String(Math.floor(currentEndTime / 60)).padStart(2, '0') +
+      ':' +
+      String(currentEndTime % 60).padStart(2, '0');
 
     timeIntervals.push({ startTime, endTime });
+
+    // Move to the next slot
+    currentStartTime = currentEndTime;
   }
 
+  // Map intervals to slots
   const slots = timeIntervals.map((time) => {
     return {
       service: payload?.service,
@@ -49,6 +57,7 @@ const createSlot = async (payload: TSlot) => {
     };
   });
 
+  // Save to database
   const result = await Slot.create(slots);
   return result;
 };
