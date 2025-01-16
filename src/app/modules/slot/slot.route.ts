@@ -13,6 +13,12 @@ router.post(
 
   SlotControllers.createSlot,
 );
+router.patch(
+  '/:id',
+  auth('admin'),
+
+  SlotControllers.updateSlotStatus,
+);
 
 const router2 = express.Router();
 

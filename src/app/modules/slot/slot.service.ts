@@ -1,7 +1,7 @@
 import httpStatus from 'http-status-codes';
 import AppError from '../../errors/AppError';
 import { Service } from '../service/service.model';
-import { TSlot } from './slot.interface';
+import { TIsBooked, TSlot } from './slot.interface';
 import { Slot } from './slot.model';
 
 const createSlot = async (payload: TSlot) => {
@@ -72,7 +72,23 @@ const getAvailableSlots = async (query: Record<string, unknown>) => {
     queryObj.service = query.serviceId as string;
   }
 
-  const result = await Slot.find(queryObj);
+  const result = await Slot.find(queryObj).populate('service');
+
+  return result;
+};
+const updateSlotStatus = async ({
+  id,
+  status,
+}: {
+  id: string;
+  status: TIsBooked;
+}) => {
+
+  const result = await Slot.findByIdAndUpdate(
+    id,
+    { isBooked: status },
+    { new: true },
+  );
 
   return result;
 };
@@ -80,4 +96,5 @@ const getAvailableSlots = async (query: Record<string, unknown>) => {
 export const SlotSlot = {
   createSlot,
   getAvailableSlots,
+  updateSlotStatus,
 };

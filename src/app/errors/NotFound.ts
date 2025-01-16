@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 const NotFound = (req: Request, res: Response) => {
   res.status(404).json({
-    success: true,
+    success: false,
     statusCode: 404,
     message: 'Not Found',
   });
