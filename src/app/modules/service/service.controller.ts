@@ -23,14 +23,17 @@ const getSingleService = catchAsync(async (req, res) => {
   });
 });
 const getAllServices = catchAsync(async (req, res) => {
-  const result = await ServiceServices.getAllService();
+  const result = await ServiceServices.getAllService(req.query);
   sendResponse(res, {
-    success: result.length ? true : false,
-    statusCode: result.length ? httpStatus.OK : httpStatus.NOT_FOUND,
-    message: result.length
+    success: result.services.length ? true : false,
+    statusCode: result.services.length ? httpStatus.OK : httpStatus.NOT_FOUND,
+    message: result.services.length
       ? 'Services retrieved successfully'
       : 'No Data Found',
-    data: result,
+    data: {
+      data: result?.services,
+      meta: result?.meta
+    },
   });
 });
 
