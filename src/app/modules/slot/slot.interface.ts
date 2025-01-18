@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 
-export type TIsBooked = 'available' | 'booked' | 'canceled';
+export type TIsBooked = 'available' | 'booked' | 'cancelled';
 
 export type TSlot = {
   service: Types.ObjectId;

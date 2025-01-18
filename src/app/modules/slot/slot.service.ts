@@ -63,7 +63,8 @@ const createSlot = async (payload: TSlot) => {
 };
 
 const getAvailableSlots = async (query: Record<string, unknown>) => {
-  const queryObj: Partial<{ service: string; date: string }> = {};
+  const queryObj: Record<string, unknown> = {};
+
   if (query?.date) {
     queryObj.date = query.date as string;
   }
@@ -83,7 +84,6 @@ const updateSlotStatus = async ({
   id: string;
   status: TIsBooked;
 }) => {
-
   const result = await Slot.findByIdAndUpdate(
     id,
     { isBooked: status },
@@ -93,8 +93,13 @@ const updateSlotStatus = async ({
   return result;
 };
 
+const getSingleSlot = async (id: string) => {
+  const result = await Slot.findById(id).populate("service");
+  return result;
+};
 export const SlotSlot = {
   createSlot,
   getAvailableSlots,
   updateSlotStatus,
+  getSingleSlot,
 };

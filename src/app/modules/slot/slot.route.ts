@@ -13,6 +13,12 @@ router.post(
 
   SlotControllers.createSlot,
 );
+
+router.get(
+  '/:id',
+  SlotControllers.getSingleSlot,
+);
+
 router.patch(
   '/:id',
   auth('admin'),
