@@ -25,7 +25,30 @@ const login: RequestHandler = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleUser: RequestHandler = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await AuthServices.getSingleUser(id as string);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'User retrieved successfully',
+    data: result,
+  });
+});
+const updateUser: RequestHandler = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await AuthServices.updateUser(id as string, req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'User updated successfully',
+    data: result,
+  });
+});
+
 export const AuthControllers = {
   signUp,
   login,
+  getSingleUser,
+  updateUser
 };

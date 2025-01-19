@@ -65,9 +65,17 @@ const getAllBookings = async () => {
 };
 
 const getUserBooking = async (user: JwtPayload) => {
-  const userData = await User.findOne({ email: user?.email, role: user?.role });
 
-  const result = Booking.find({ customer: userData?._id });
+  const userData = await User.findOne({ email: user?.email, role: user?.role });
+  
+  const result = await Booking.find({ user: userData?._id })
+    .populate({
+      path: 'slot',
+      populate: { path: 'service' },
+    })
+
+    .exec();
+ 
   return result;
 };
 

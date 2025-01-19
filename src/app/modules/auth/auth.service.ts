@@ -39,7 +39,18 @@ const login = async (payload: TLoginUser) => {
   };
 };
 
+const getSingleUser = async (id: string) => {
+  const ressult = await User.findById(id);
+  return ressult;
+};
+const updateUser = async (id: string, payload: Partial<TUser>) => {
+  const ressult = await User.findByIdAndUpdate(id, payload, { new: true });
+  return ressult;
+};
+
 export const AuthServices = {
   signUp,
   login,
+  getSingleUser,
+  updateUser,
 };

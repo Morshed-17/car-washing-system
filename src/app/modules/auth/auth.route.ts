@@ -17,4 +17,15 @@ router.post(
   AuthControllers.login,
 );
 
+router.put(
+  '/update-user/:id',
+
+  AuthControllers.updateUser,
+);
+router.get(
+  '/user/:id',
+
+  AuthControllers.getSingleUser,
+);
+
 export const AuthRoutes = router;
