@@ -7,6 +7,7 @@ import {
   BookingRoutes2,
 } from '../modules/booking/booking.route';
 import { ReviewRoute } from '../modules/review/review.route';
+import { paymentRoutes } from '../modules/payment/payment.route';
 
 const router = express.Router();
 
@@ -30,6 +31,10 @@ const moduleRoutes = [
   {
     path: '/bookings',
     route: BookingRoutes,
+  },
+  {
+    path: '/payment',
+    route: paymentRoutes,
   },
   {
     path: '/my-bookings',

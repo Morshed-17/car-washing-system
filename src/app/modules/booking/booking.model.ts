@@ -1,44 +1,33 @@
-import { model, Schema } from 'mongoose';
-import { vehicleTypes } from './booking.constant';
+import mongoose, { model, Schema, Types } from 'mongoose';
+
 import { TBooking } from './booking.interface';
 
-const bookingSchema = new Schema(
+const bookingSchema = new Schema<TBooking>(
   {
-    customer: {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    service: {
-      type: Schema.Types.ObjectId,
-      ref: 'Service',
       required: true,
+      ref: 'User',
     },
     slot: {
       type: Schema.Types.ObjectId,
+      required: true,
       ref: 'Slot',
-      required: true,
     },
-    vehicleType: {
+    paymentStatus: {
       type: String,
-      enum: vehicleTypes,
-      required: true,
+      enum: ['Pending', 'Paid', 'Failed'],
+      default: 'Pending',
     },
-    vehicleBrand: {
-      type: String,
-      required: true,
-    },
-    vehicleModel: {
+
+    transactionId: {
       type: String,
       required: true,
     },
-    manufacturingYear: {
+    totalPrice: {
       type: Number,
-      required: true,
-    },
-    registrationPlate: {
-      type: String,
-      required: true,
-    },
+      required: true
+    }
   },
   { timestamps: true },
 );

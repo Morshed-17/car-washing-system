@@ -1,35 +1,18 @@
 import { Types } from 'mongoose';
 
-export type TVehicleTypes =
-  | 'car'
-  | 'truck'
-  | 'SUV'
-  | 'van'
-  | 'motorcycle'
-  | 'bus'
-  | 'electricVehicle'
-  | 'hybridVehicle'
-  | 'bicycle'
-  | 'tractor';
-
 export type TBooking = {
-  customer: Types.ObjectId;
-  service: Types.ObjectId;
+  user?: Types.ObjectId;
   slot: Types.ObjectId;
-  vehicleType: TVehicleTypes;
-  vehicleBrand: string;
-  vehicleModel: string;
-  manufacturingYear: number;
-  registrationPlate: string;
+  paymentStatus: 'Pending' | 'Paid' | 'Failed';
+  transactionId: string;
+  totalPrice: number;
 };
 
-
-export type TBookingForReq = {
-  serviceId: Types.ObjectId;
-  slotId: Types.ObjectId;
-  vehicleType: TVehicleTypes;
-  vehicleBrand: string;
-  vehicleModel: string;
-  manufacturingYear: number;
-  registrationPlate: string;
+export type TPaymentData = {
+  transactionId: string;
+  totalPrice: number;
+  customerName: string;
+  customerAddress: string; // Fixed the typo in "customerAddres"
+  customerEmail: string;
+  customerPhone?: string; // Marked as optional since `userData?.phone` may be undefined
 };
