@@ -14,5 +14,6 @@ export type TPaymentData = {
   customerName: string;
   customerAddress: string; // Fixed the typo in "customerAddres"
   customerEmail: string;
-  customerPhone?: string; // Marked as optional since `userData?.phone` may be undefined
+  customerPhone?: string;
+ 
 };

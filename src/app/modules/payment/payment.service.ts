@@ -8,44 +8,39 @@ import { readFileSync } from 'fs';
 const confirmationBooking = async (transactionId: string, status: string) => {
   const verifyResponse = await verifyPayment(transactionId);
 
-  let result;
+  if (!verifyResponse) {
+    throw new AppError(500, 'Payment verification failed');
+  }
+
+  let paymentStatus = 'Failed';
   let message = '';
 
+  if (verifyResponse.pay_status === 'Successful') {
+    paymentStatus = 'Paid';
 
-  if (verifyResponse && verifyResponse.pay_status === 'Successful') {
-    result = await Booking.findOneAndUpdate(
+    const booking = await Booking.findOneAndUpdate(
       { transactionId },
-      {
-        paymentStatus: 'Paid',
-      },
+      { paymentStatus },
+      { new: true },
     );
-    message = 'Successfully Paid!';
-  } else {
-    await Booking.findOneAndUpdate(
-      { transactionId },
-      {
-        paymentStatus: 'Failed',
-      },
-    );
-    message = 'Payment Failed!';
+
+    if (booking) {
+      await Slot.findByIdAndUpdate(booking.slot, { isBooked: 'booked' });
+    }
   }
+
+  if (verifyResponse.pay_status !== 'Successful') {
+    await Booking.findOneAndUpdate({ transactionId }, { paymentStatus });
+  }
+
+  message = paymentStatus === 'Paid' ? 'Payment Successful' : 'Payment Failed';
 
   const filePath = join(__dirname, '../../views/confirmation.html');
 
   let template = readFileSync(filePath, 'utf-8');
   template = template.replace('{{message}}', message);
 
-  if (!result) return template;
-
-  await Slot.findByIdAndUpdate(
-    result.slot,
-    {
-      isBooked: 'booked',
-    },
-    { new: true },
-  );
-
-  return `<h1>Payment ${status}</h1>`;
+  return template;
 };
 
 export const paymentServices = {

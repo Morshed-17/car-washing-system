@@ -1,4 +1,3 @@
-
 import { JwtPayload } from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { Booking } from './booking.model';
@@ -38,20 +37,23 @@ const createBooking = async (payload: { slot: string }, user: JwtPayload) => {
     customerPhone: userData?.phone,
   };
 
+  //* initiate payment
+
   const paymentSession = await initiatePayment(paymentData);
-
-  console.log(paymentSession)
-
+  if (!paymentSession) {
+    throw new AppError(500, 'Failed to initiate payment');
+  }
 
   const booking = await Booking.create({
     user: userData._id,
     slot: payload.slot,
     totalPrice: paymentData.totalPrice,
     transactionId,
+    paymentStatus: 'Pending',
   });
-  
+
   if (!booking) {
-    throw new AppError(500, 'Something went wrong while booking');
+    throw new AppError(500, 'Failed to create booking');
   }
 
   return paymentSession;
