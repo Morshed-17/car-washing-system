@@ -33,7 +33,7 @@ const confirmationBooking = async (transactionId: string, status: string) => {
     await Booking.findOneAndUpdate({ transactionId }, { paymentStatus });
   }
 
-  message = paymentStatus === 'Paid' ? 'Payment Successful' : 'Payment Failed';
+  message = paymentStatus === 'Paid' ? 'Payment Successful.' : 'Payment Failed!';
 
   const filePath = join(__dirname, '../../views/confirmation.html');
 
